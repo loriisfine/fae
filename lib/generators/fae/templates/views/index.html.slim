@@ -1,4 +1,4 @@
-<% table_class = @has_position ? 'main_content-sortable' : 'main_table-sort_columns' -%>
+<% table_class = @has_position ? 'js-sort-row' : 'js-sort-column' -%>
 <% num_columns = 3 -%>
 == render 'fae/shared/index_header', title: @klass_humanized.pluralize.titleize
 
@@ -21,15 +21,15 @@ main.content
     tbody
       - if @items.present?
         - @items.each do |item|
-          tr id="#{@klass_singular}_#{item.id}"
+          tr id=fae_sort_id(item)
 <% if @has_position -%>
-            td.sortable-handle: span.icon-sort
+            td.sortable-handle: i.icon-sort
 <% end -%>
             td = link_to item.fae_display_field, edit_<%= options.namespace %>_<%= class_name.underscore %>_path(item)
             td = fae_date_format item.updated_at
 <% @toggle_attrs.each do |attr| -%>
             td = fae_toggle item, :<%= attr %>
 <% end -%>
-            td.-action = fae_delete_button item
+            td = fae_delete_button item
       - else
         tr: td colspan="<%= num_columns %>" No items found

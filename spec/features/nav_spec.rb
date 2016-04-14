@@ -57,17 +57,4 @@ feature 'Main Navigation' do
     expect(page).to_not have_selector('#js-sidenav')
   end
 
-  scenario 'accordions should expand when they are clicked', js: true do
-    admin_login
-    team = FactoryGirl.create(:team)
-    team2 = FactoryGirl.create(:team)
-    visit admin_team_coaches_path(team)
-
-    # Ensure coach is hidden
-    expect(page).to have_selector('#js-sidenav a', text: 'Coaches', count: 1)
-    page.find('#js-sidenav .js-accordion > a', text: team2.name).click
-
-    expect(page).to have_selector('#js-sidenav a', text: 'Coaches', count: 2)
-  end
-
 end

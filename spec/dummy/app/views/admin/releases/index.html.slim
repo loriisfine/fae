@@ -10,7 +10,7 @@ main.content
     = fae_filter_select :test, options: [['one', 1], ['two', 2]]
     = fae_filter_select :grouped_test, grouped_options: { 'Numbers' => [['one', 1], ['two', 2]], 'Letters' => [['The letter J', 'J'], ['The letter N', 'N']] }
     = fae_filter_select :grouped_association, collection: Aroma.all, grouped_by: :release
-  table.main_table-sort_columns
+  table.js-sort-column
     thead
       tr
         th Name
@@ -34,7 +34,7 @@ main.content
             td = fae_date_format item.updated_at
             td = fae_toggle item, :on_stage
             td = fae_toggle item, :on_prod
-            td.-action = fae_clone_button item
-            td.-action = fae_delete_button item
+            td = fae_clone_button item
+            td = fae_delete_button item
       - else
         tr: td colspan="9" No items found

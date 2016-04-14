@@ -405,6 +405,11 @@ fae_clone_button item
 
 You can use `fae_delete_button` in your list view tables to provide easy access to delete an item.
 
+| option | type | description |
+|---|---|---|
+| item | ActiveRecord object | item to be deleted |
+| delete_path (optional) | String|Route helper | delete endpoint |
+
 ```ruby
 fae_delete_button item
 ```
@@ -450,6 +455,16 @@ Retrieve a user's Gravatar image URL based on their email.
 ```ruby
 fae_avatar(current_user)
 #=> 'https://secure.gravatar.com/....'
+```
+
+## fae_sort_id
+
+This method returns an string suitable for the row IDs on a sortable table (you can make a table sortable by adding the `js-sort-row` class to it).
+
+The parsed string is formatted as `"#{class_name}_#{item_id}"`, which the sort method digests and exectues the sort logic.
+
+```slim
+tr id=fae_sort_id(item)
 ```
 
 ---
@@ -511,6 +526,12 @@ section.content#nested_image_gallery
   ...
 section.content#recent_changes
   ...
+```
+
+To separate name and ID selector, pass an Array instead of a String.
+
+```ruby
+- subnav_array = ['SEO', 'Attributes', ['Images', 'images_table']]
 ```
 
 **Examples**

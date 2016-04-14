@@ -78,4 +78,46 @@ describe Fae::ViewHelper do
     end
   end
 
+  describe '#fae_delete_button' do
+    # Necessary for fae_scope in the fae_delete_button method
+    include Fae::ApplicationHelper
+
+    it 'should include a polymorphic path when fae_parent is present' do
+      item = FactoryGirl.create(:coach)
+      expect( fae_delete_button(item) ).to match /\/admin\/teams\/\d+\/coaches\/\d+/
+    end
+
+    it 'should include a regular path when fae_parent is not present' do
+      item = FactoryGirl.create(:release)
+      expect( fae_delete_button(item) ).to match /\/admin\/releases\/\d+/
+    end
+
+    it 'should include a custom path when a second argument is supplied' do
+      item = FactoryGirl.create(:coach)
+
+      # as a Rails path helper
+      expect( fae_delete_button(item, ['admin', item.team, item]) ).to match /\/admin\/teams\/\d+\/coaches\/\d+/
+
+      # as a string
+      expect( fae_delete_button(item, '/admin/custom/route') ).to match /\/admin\/custom\/route/
+    end
+  end
+
+  describe '#fae_sort_id' do
+    it 'should return a formatted string for single word models' do
+      item = FactoryGirl.create(:varietal, id: 524)
+      expect(fae_sort_id(item)).to eq('varietal_524')
+    end
+
+    it 'should return a formatted string for multiple word models' do
+      item = FactoryGirl.create(:selling_point, id: 235)
+      expect(fae_sort_id(item)).to eq('selling_point_235')
+    end
+
+    it 'should return a formatted string for scoped models' do
+      item = FactoryGirl.create(:fae_user, id: 143)
+      expect(fae_sort_id(item)).to eq('fae__user_143')
+    end
+  end
+
 end
