@@ -1,5 +1,5 @@
 nav.nav.mobilenav
-  ul.js-nav data-coordinates=@fae_navigation.coordinates.join(',')
+  ul
     - @fae_navigation.structure.each do |item|
       ruby:
         item[:path] ||= '#'
@@ -30,10 +30,6 @@ nav.nav.mobilenav
                     - subitem[:sublinks].each do |thirditem|
                       - thirditem[:path] ||= '#'
                       li: a href=thirditem[:path] = thirditem[:text]
-
-              li: a.-users href=fae.users_path Users
-              li: a.-activity href=fae.activity_log_path Activity Log
-              li: a.-settings href=fae.option_path Root Settings
 
     - if current_user.super_admin_or_admin?
       li.mobilenav-accordion.js-accordion

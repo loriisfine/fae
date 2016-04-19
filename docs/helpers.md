@@ -409,11 +409,15 @@ You can use `fae_delete_button` in your list view tables to provide easy access 
 |---|---|---|
 | item | ActiveRecord object | item to be deleted |
 | delete_path (optional) | String|Route helper | delete endpoint |
+| attributes (optional) | symbol => value | pass custom attributes to the `link_to` helper |
 
 ```ruby
 fae_delete_button item
 ```
 
+```ruby
+fae_delete_button item, "/#{fae_path}/delete", remote: true, data: { delete: 'true' }
+```
 ## form_header
 
 The form_header helper takes an AR object or string to render an `<h1>` based on the action. Can also display breadcrumb links.
@@ -459,9 +463,9 @@ fae_avatar(current_user)
 
 ## fae_sort_id
 
-This method returns an string suitable for the row IDs on a sortable table (you can make a table sortable by adding the `js-sort-row` class to it).
+This method returns a string suitable for the row IDs on a sortable table. Note: you can make a table sortable by adding the `js-sort-row` class to it.
 
-The parsed string is formatted as `"#{class_name}_#{item_id}"`, which the sort method digests and exectues the sort logic.
+The parsed string is formatted as `"#{class_name}_#{item_id}"`, which the sort method digests and executes the sort logic.
 
 ```slim
 tr id=fae_sort_id(item)
