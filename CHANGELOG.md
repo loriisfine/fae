@@ -28,12 +28,14 @@
     + Rename sorting classes to be more clear and intuitive
     + \#55244: Add support toggle and sort support for scoped models
     + Add fae_sort_id view helper
+    + \#52457: Allow diabling admin on specific environments
 - bugs
     + \#46537: Change root settings header to be 'Root Settings' and not 'Edit Option'
     + \#46157: Logo in root setting is no longer marked required
     + \#55752: YouTube helper image converted to display as a background image because of Sprockets compilation issue
     + \#55977: Fix positioning of smooth scroll on new models from nested forms
     + Rearrange assets to expose the Fae JS API and SCSS mixins/variables to parent apps
+    + \#57071: Namespace vendor files within the Fae engine namespace
 
 ## 1.2.4
 
